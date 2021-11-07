@@ -8,9 +8,6 @@ function initModels(sequelize) {
   var cars = _cars(sequelize, DataTypes);
   var driver = _driver(sequelize, DataTypes);
 
-  carrent.belongsTo(cars, { as: "car", foreignKey: "carId"});
-  cars.hasMany(carrent, { as: "carrents", foreignKey: "carId"});
-
   return {
     carrent,
     cars,

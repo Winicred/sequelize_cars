@@ -1,4 +1,2 @@
 # MAZDA Car Rent
-```
-Made by: Danil Barsukov and Kirill Goritski
-```
+>Made by: ***Danil Barsukov*** and ***Kirill Goritski***

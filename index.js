@@ -36,7 +36,10 @@ const options = {
             }, {
                 name: "drivers",
                 description: "Everything about drivers"
-            },
+            }, {
+                name: "car rent",
+                description: "Everything about car rent"
+            }
         ],
         servers: [
             {

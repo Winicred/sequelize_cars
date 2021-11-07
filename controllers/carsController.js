@@ -1,5 +1,7 @@
-const Cars = require("../models/cars")
-const {Op} = require("sequelize");
+const {Op, DataTypes} = require("sequelize");
+const sequelize = require("sequelize");
+
+const Cars = require('../models/cars')
 
 exports.findAll = (req, res) => {
     Cars.findAll().then(data => {
@@ -22,11 +24,11 @@ exports.create = (req, res) => {
     const car = {
         name: req.body.name,
         model: req.body.model,
-        number: req.body.number,
+        number: req.body.number.toUpperCase(),
         vin: req.body.vin,
         petrol: req.query.petrol,
         year: req.body.year,
-        color: req.body.color,
+        color: req.body.color.toLowerCase(),
     }
 
     Cars.create(car).then(data => {
@@ -63,11 +65,11 @@ exports.update = (req, res) => {
     const car = {
         name: req.body.name,
         model: req.body.model,
-        number: req.body.number,
+        number: req.body.number.toUpperCase(),
         vin: req.body.vin,
         petrol: req.query.petrol,
         year: req.body.year,
-        color: req.body.color,
+        color: req.body.color.toLowerCase(),
     }
 
     Cars.update(car, {where: {id: req.params.id}}).then(() => {

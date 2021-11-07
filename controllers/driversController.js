@@ -23,8 +23,8 @@ exports.create = (req, res) => {
         firstname: req.body.firstname,
         lastname: req.body.lastname,
         birthday: req.body.birthday,
-        passNumber: req.body.passNumber,
-        licenseId: req.body.licenseId,
+        passNumber: req.body.passNumber.toUpperCase(),
+        licenseId: req.body.licenseId.toUpperCase(),
         sex: req.query.sex,
     }
 
@@ -63,8 +63,8 @@ exports.update = (req, res) => {
         firstname: req.body.firstname,
         lastname: req.body.lastname,
         birthday: req.body.birthday,
-        passNumber: req.body.passNumber,
-        licenseId: req.body.licenseId,
+        passNumber: req.body.passNumber.toUpperCase(),
+        licenseId: req.body.licenseId.toUpperCase(),
         sex: req.query.sex,
     }
 
@@ -94,8 +94,8 @@ exports.delete = (req, res) => {
     })
 }
 
-exports.findAllByName = (req, res) => {
-    Drivers.findAll({where: {name: {[Op.like]: `${req.params.name}%`}}}).then(data => {
+exports.findAllByFirstname = (req, res) => {
+    Drivers.findAll({where: {firstname: {[Op.like]: `${req.params.firstname}%`}}}).then(data => {
         if (data.length !== 0) {
             res.send(data)
         } else {

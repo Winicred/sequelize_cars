@@ -177,10 +177,10 @@ module.exports = app => {
      *          summary: Add a new driver to the database.
      *          parameters:
      *            - in: query
-     *              name: petrol
+     *              name: sex
      *              description: The petrol type of driver.
      *              required:
-     *                - petrol
+     *                - sex
      *              schema:
      *                  type: string
      *                  enum:
@@ -283,9 +283,9 @@ module.exports = app => {
      *              required: true
      *              description: Numeric ID of the driver to update
      *            - in: query
-     *              name: petrol
+     *              name: sex
      *              required: true
-     *              description: The petrol type of driver.
+     *              description: The sex of driver.
      *              schema:
      *                  type: string
      *                  enum:
@@ -441,18 +441,18 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/drivers/findAllByName/{name}:
+     * /api/drivers/findAllByFirstname/{firstname}:
      *      get:
      *          tags:
      *          - drivers
-     *          summary: Retrieve driver(s) by name.
+     *          summary: Retrieve driver(s) by firstname.
      *          parameters:
      *            - in: path
-     *              name: name
+     *              name: firstname
      *              schema:
      *                  type: string
      *              required: true
-     *              description: Car(s) to get by name
+     *              description: Car(s) to get by firstname
      *          responses:
      *              200:
      *                  description: Success
@@ -503,7 +503,7 @@ module.exports = app => {
      *                  description: Not found
      */
 
-    router.get("/findAllByName/:name", drivers.findAllByName)
+    router.get("/findAllByFirstname/:firstname", drivers.findAllByFirstname)
 
     app.use("/api/drivers", router)
 }
