@@ -20,6 +20,7 @@ app.get("/", (req, res) => {
 
 require("./routes/carsRoutes")(app)
 require("./routes/driverRoutes")(app)
+require("./routes/carRentRoutes")(app)
 
 const options = {
     definition: {

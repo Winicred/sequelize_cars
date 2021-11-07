@@ -74,7 +74,11 @@ exports.update = (req, res) => {
 
     Cars.update(car, {where: {id: req.params.id}}).then(() => {
         Cars.findOne({where: {id: req.params.id}}).then(data => {
-            res.send(data)
+            if (data !== null){
+                res.send(data)
+            } else {
+                res.status(404).send()
+            }
         })
     }).catch(err => {
         res.status(500).send({
@@ -100,7 +104,7 @@ exports.delete = (req, res) => {
 
 exports.findAllByName = (req, res) => {
     Cars.findAll({where: {name: {[Op.like]: `${req.params.name}%`}}}).then(data => {
-        if (data.length !== 0) {
+        if (Object.keys(data).length !== 0) {
             res.send(data)
         } else {
             res.status(204).send()

@@ -1,7 +1,6 @@
-const {Op, DataTypes} = require("sequelize");
-const sequelize = require("sequelize");
-
 const CarRent = require('../models/carrent')
+
+let today = new Date().toISOString().slice(0, 10)
 
 exports.findAll = (req, res) => {
     CarRent.findAll().then(data => {
@@ -24,12 +23,20 @@ exports.create = (req, res) => {
     const rent = {
         carId: req.body.carId,
         driverId: req.body.driverId,
-        start_date: req.body.start_date,
+        start_date: today + " " + req.body.start_date,
         duration: req.body.duration
     }
 
+    console.log(today + " " + req.body.start_date)
+
     CarRent.create(rent).then(data => {
-        res.send(data)
+        res.send({
+            id: data.id,
+            carId: data.carId,
+            driverId: data.driverId,
+            start_date: data.start_date.toISOString().replace('Z', '').replace('T', ' ').replace('.000', ''),
+            duration: data.duration
+        })
     }).catch(err => {
         res.status(500).send({
             message: err.message || "Some error occurred while creating the new rent."
@@ -42,7 +49,7 @@ exports.findOneById = (req, res) => {
         if (data !== null) {
             res.send(data)
         } else {
-            res.status(204).send()
+            res.status(404).send()
         }
     }).catch(err => {
         res.status(500).send({
@@ -68,7 +75,17 @@ exports.update = (req, res) => {
 
     CarRent.update(rent, {where: {id: req.params.id}}).then(() => {
         CarRent.findOne({where: {id: req.params.id}}).then(data => {
-            res.send(data)
+            if (data !== null) {
+                res.send({
+                    id: data.id,
+                    carId: data.carId,
+                    driverId: data.driverId,
+                    start_date: data.start_date.toISOString().replace('Z', '').replace('T', ' ').replace('.000', ''),
+                    duration: data.duration
+                })
+            } else {
+                res.status(404).send()
+            }
         })
     }).catch(err => {
         res.status(500).send({
@@ -88,6 +105,35 @@ exports.delete = (req, res) => {
     }).catch(err => {
         res.status(500).send({
             message: err.message || "Some error occurred while deleting the rent."
+        })
+    })
+}
+
+exports.findAllByCarId = (req, res) => {
+    CarRent.findAll({where: {carId: req.params.carId}}).then(data => {
+        console.log(typeof data)
+        if (Object.keys(data).length !== 0) {
+            res.send(data)
+        } else {
+            res.status(404).send()
+        }
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving rent(s)."
+        })
+    })
+}
+
+exports.findAllByDriverId = (req, res) => {
+    CarRent.findAll({where: {driverId: req.params.driverId}}).then(data => {
+        if (Object.keys(data).length !== 0) {
+            res.send(data)
+        } else {
+            res.status(404).send()
+        }
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving rent(s)."
         })
     })
 }

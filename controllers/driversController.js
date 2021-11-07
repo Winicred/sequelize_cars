@@ -70,7 +70,11 @@ exports.update = (req, res) => {
 
     Drivers.update(driver, {where: {id: req.params.id}}).then(() => {
         Drivers.findOne({where: {id: req.params.id}}).then(data => {
-            res.send(data)
+            if (data !== null){
+                res.send(data)
+            } else {
+                res.status(404).send()
+            }
         })
     }).catch(err => {
         res.status(500).send({
@@ -96,7 +100,7 @@ exports.delete = (req, res) => {
 
 exports.findAllByFirstname = (req, res) => {
     Drivers.findAll({where: {firstname: {[Op.like]: `${req.params.firstname}%`}}}).then(data => {
-        if (data.length !== 0) {
+        if (Object.keys(data).length !== 0) {
             res.send(data)
         } else {
             res.status(204).send()

@@ -1,6 +1,6 @@
-const sequelize = require('sequelize');
-const db = require('../config/database');
+const db = require('../config/database')
 const {DataTypes} = require("sequelize");
+const sequelize = require("sequelize");
 
 const CarRent = db.define('carrent', {
     id: {
@@ -11,14 +11,22 @@ const CarRent = db.define('carrent', {
     },
     carId: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+            model: 'cars',
+            key: 'id'
+        }
     },
     driverId: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+            model: 'driver',
+            key: 'id'
+        }
     },
-    start_time: {
-        type: DataTypes.DATEONLY,
+    start_date: {
+        type: DataTypes.DATE,
         allowNull: false
     },
     duration: {
@@ -36,6 +44,20 @@ const CarRent = db.define('carrent', {
             using: "BTREE",
             fields: [
                 {name: "id"},
+            ]
+        },
+        {
+            name: "carId",
+            using: "BTREE",
+            fields: [
+                {name: "carId"},
+            ]
+        },
+        {
+            name: "driverId",
+            using: "BTREE",
+            fields: [
+                {name: "driverId"},
             ]
         },
     ]

@@ -12,24 +12,24 @@
  *              properties:
  *                  id:
  *                      type: integer
- *                      description: The auto-generated ID of the car.
+ *                      description: The auto-generated ID of the rent.
  *                  carId:
  *                      type: integer
- *                      description: The carsId of car rent.
+ *                      description: The carsId of ent.
  *                  driverId:
  *                      type: integer
- *                      description: The carsId of car rent.
+ *                      description: The carsId of rent.
  *                  start_date:
  *                      type: string
- *                      description: The car rent start date.
+ *                      description: The rent start time.
  *                  duration:
  *                      type: string
- *                      description: The car rent duration time (hours).
+ *                      description: The rent duration time (hours).
  *              example:
  *                  id: 1
  *                  carId: 1
  *                  driverId: 1
- *                  start_date: 04-11-2021
+ *                  start_date: 2021-11-08T00:00:00Z
  *                  duration: 8
  */
 
@@ -59,28 +59,27 @@ module.exports = app => {
      *                              properties:
      *                                  id:
      *                                      type: integer
-     *                                      description: The auto-generated ID of the car.
+     *                                      description: The auto-generated ID of the rent.
      *                                      example: 1
      *                                  carId:
      *                                      type: integer
-     *                                      description: The carsId of car rent.
+     *                                      description: The carsId of rent.
      *                                      example: 1
      *                                  driverId:
      *                                      type: integer
-     *                                      description: The driverId of car rent.
+     *                                      description: The driverId of rent.
      *                                      example: 1
      *                                  start_date:
      *                                      type: string
-     *                                      description: The car rent start date.
-     *                                      example: 04-11-2021
+     *                                      description: The rent start time.
+     *                                      example: 2021-11-08T00:00:00Z
      *                                  duration:
-     *                                      type: string
-     *                                      description: The car rent duration time (hours).
+     *                                      type: integer
+     *                                      description: The rent duration time (hours).
      *                                      example: 8
      */
 
     router.get("/", carRent.findAll)
-
 
     /**
      * @swagger
@@ -88,14 +87,14 @@ module.exports = app => {
      *      get:
      *          tags:
      *          - car rent
-     *          summary: Retrieve the car rent by ID.
+     *          summary: Retrieve the rent by ID.
      *          parameters:
      *            - in: path
      *              name: id
      *              schema:
      *                  type: integer
      *              required: true
-     *              description: Numeric ID of the car rent to get
+     *              description: Numeric ID of the rent to get
      *          responses:
      *              200:
      *                  description: Success
@@ -111,23 +110,23 @@ module.exports = app => {
      *                              properties:
      *                                  id:
      *                                      type: integer
-     *                                      description: The auto-generated ID of the car.
+     *                                      description: The auto-generated ID of the rent.
      *                                      example: 1
      *                                  carId:
      *                                      type: integer
-     *                                      description: The carsId of car rent.
+     *                                      description: The carsId of rent.
      *                                      example: 1
      *                                  driverId:
      *                                      type: integer
-     *                                      description: The driverId of car rent.
+     *                                      description: The driverId of rent.
      *                                      example: 1
      *                                  start_date:
      *                                      type: string
-     *                                      description: The car rent start date.
-     *                                      example: 04-11-2021
+     *                                      description: The rent start time.
+     *                                      example: 2021-11-08T00:00:00Z
      *                                  duration:
-     *                                      type: string
-     *                                      description: The car rent duration time (hours).
+     *                                      type: integer
+     *                                      description: The rent duration time (hours).
      *                                      example: 8
      *              404:
      *                  description: Not found
@@ -156,16 +155,17 @@ module.exports = app => {
      *                          properties:
      *                              carId:
      *                                  type: integer
-     *                                  description: The carsId of car rent.
+     *                                  description: The carsId of rent.
      *                              driverId:
      *                                  type: integer
-     *                                  description: The driverId of car rent.
+     *                                  description: The driverId of rent.
      *                              start_date:
      *                                  type: string
-     *                                  description: The car rent start date.
+     *                                  description: The rent start time.
+     *                                  example: 00:00:00
      *                              duration:
-     *                                  type: string
-     *                                  description: The car rent duration time (hours).
+     *                                  type: integer
+     *                                  description: The rent duration time (hours).
      *          responses:
      *              200:
      *                  description: Success
@@ -181,23 +181,23 @@ module.exports = app => {
      *                              properties:
      *                                  id:
      *                                      type: integer
-     *                                      description: The auto-generated ID of the car.
+     *                                      description: The auto-generated ID of the rent.
      *                                      example: 1
      *                                  carId:
      *                                      type: integer
-     *                                      description: The carsId of car rent.
+     *                                      description: The carsId of rent.
      *                                      example: 1
      *                                  driverId:
      *                                      type: integer
-     *                                      description: The driverId of car rent.
+     *                                      description: The driverId of rent.
      *                                      example: 1
      *                                  start_date:
      *                                      type: string
-     *                                      description: The car rent start date.
-     *                                      example: 04-11-2021
+     *                                      description: The rent start time.
+     *                                      example: 2021-11-08T00:00:00Z
      *                                  duration:
-     *                                      type: string
-     *                                      description: The car rent duration time (hours).
+     *                                      type: integer
+     *                                      description: The rent duration time (hours).
      *                                      example: 8
      *              400:
      *                  description: Invalid input
@@ -220,7 +220,7 @@ module.exports = app => {
      *              schema:
      *                  type: integer
      *              required: true
-     *              description: Numeric ID of the car rent to update
+     *              description: Numeric ID of the rent to update
      *          requestBody:
      *              required: true
      *              content:
@@ -235,16 +235,17 @@ module.exports = app => {
      *                          properties:
      *                              carId:
      *                                  type: integer
-     *                                  description: The carsId of car rent.
+     *                                  description: The carsId of rent.
      *                              driverId:
      *                                  type: integer
-     *                                  description: The driverId of car rent.
+     *                                  description: The driverId of rent.
      *                              start_date:
      *                                  type: string
-     *                                  description: The car rent start date.
+     *                                  description: The rent start time.
+     *                                  example: yyyy-mm-dd 00:00:00
      *                              duration:
-     *                                  type: string
-     *                                  description: The car rent duration time (hours).
+     *                                  type: integer
+     *                                  description: The rent duration time (hours).
      *          responses:
      *              200:
      *                  description: Success
@@ -260,23 +261,23 @@ module.exports = app => {
      *                              properties:
      *                                  id:
      *                                      type: integer
-     *                                      description: The auto-generated ID of the car.
+     *                                      description: The auto-generated ID of the rent.
      *                                      example: 1
      *                                  carId:
      *                                      type: integer
-     *                                      description: The carsId of car rent.
+     *                                      description: The carsId of rent.
      *                                      example: 1
      *                                  driverId:
      *                                      type: integer
-     *                                      description: The driverId of car rent.
+     *                                      description: The driverId of rent.
      *                                      example: 1
      *                                  start_date:
      *                                      type: string
-     *                                      description: The car rent start date.
-     *                                      example: 04-11-2021
+     *                                      description: The rent start time.
+     *                                      example: 2021-11-08T00:00:00Z
      *                                  duration:
-     *                                      type: string
-     *                                      description: The car rent duration time (hours).
+     *                                      type: integer
+     *                                      description: The rent duration time (hours).
      *                                      example: 8
      *              400:
      *                  description: Invalid status supplier
@@ -299,7 +300,7 @@ module.exports = app => {
      *              schema:
      *                  type: integer
      *              required: true
-     *              description: Numeric ID of the cer rent to get
+     *              description: Numeric ID of the rent (Before deleting a rent, make sure that the records in the models of cars and drivers are deleted)
      *          responses:
      *              200:
      *                  description: Success
@@ -315,23 +316,23 @@ module.exports = app => {
      *                              properties:
      *                                  id:
      *                                      type: integer
-     *                                      description: The auto-generated ID of the car.
+     *                                      description: The auto-generated ID of the rent.
      *                                      example: 1
      *                                  carId:
      *                                      type: integer
-     *                                      description: The carsId of car rent.
+     *                                      description: The carsId of rent.
      *                                      example: 1
      *                                  driverId:
      *                                      type: integer
-     *                                      description: The driverId of car rent.
+     *                                      description: The driverId of rent.
      *                                      example: 1
      *                                  start_date:
      *                                      type: string
-     *                                      description: The car rent start date.
-     *                                      example: 04-11-2021
+     *                                      description: The rent start time.
+     *                                      example: 2021-11-08T00:00:00Z
      *                                  duration:
-     *                                      type: string
-     *                                      description: The car rent duration time (hours).
+     *                                      type: integer
+     *                                      description: The rent duration time (hours).
      *                                      example: 8
      *              400:
      *                  description: Invalid status supplier
@@ -340,6 +341,113 @@ module.exports = app => {
      */
 
     router.delete("/:id", carRent.delete)
+
+    /**
+     * @swagger
+     * /api/carRent/byCar/{carId}:
+     *      get:
+     *          tags:
+     *          - car rent
+     *          summary: Retrieve the rent by car ID.
+     *          parameters:
+     *            - in: path
+     *              name: carId
+     *              schema:
+     *                  type: integer
+     *              required: true
+     *              description: Numeric car ID of the rent to get
+     *          responses:
+     *              200:
+     *                  description: Success
+     *                  content:
+     *                      application/json:
+     *                          schema:
+     *                              type: object
+     *                              required:
+     *                                - carId
+     *                                - driverId
+     *                                - start_date
+     *                                - duration
+     *                              properties:
+     *                                  id:
+     *                                      type: integer
+     *                                      description: The auto-generated ID of the rent.
+     *                                      example: 1
+     *                                  carId:
+     *                                      type: integer
+     *                                      description: The carsId of rent.
+     *                                      example: 1
+     *                                  driverId:
+     *                                      type: integer
+     *                                      description: The driverId of rent.
+     *                                      example: 1
+     *                                  start_date:
+     *                                      type: string
+     *                                      description: The rent start time.
+     *                                      example: 2021-11-08T00:00:00Z
+     *                                  duration:
+     *                                      type: integer
+     *                                      description: The rent duration time (hours).
+     *                                      example: 8
+     *              404:
+     *                  description: Not found
+     */
+
+    router.get("/byCar/:carId", carRent.findAllByCarId)
+
+
+    /**
+     * @swagger
+     * /api/carRent/byDriver/{driverId}:
+     *      get:
+     *          tags:
+     *          - car rent
+     *          summary: Retrieve the rent by driver ID.
+     *          parameters:
+     *            - in: path
+     *              name: driverId
+     *              schema:
+     *                  type: integer
+     *              required: true
+     *              description: Numeric driver ID of the rent to get
+     *          responses:
+     *              200:
+     *                  description: Success
+     *                  content:
+     *                      application/json:
+     *                          schema:
+     *                              type: object
+     *                              required:
+     *                                - carId
+     *                                - driverId
+     *                                - start_date
+     *                                - duration
+     *                              properties:
+     *                                  id:
+     *                                      type: integer
+     *                                      description: The auto-generated ID of the rent.
+     *                                      example: 1
+     *                                  carId:
+     *                                      type: integer
+     *                                      description: The carsId of rent.
+     *                                      example: 1
+     *                                  driverId:
+     *                                      type: integer
+     *                                      description: The driverId of rent.
+     *                                      example: 1
+     *                                  start_date:
+     *                                      type: string
+     *                                      description: The rent start time.
+     *                                      example: 2021-11-08T00:00:00Z
+     *                                  duration:
+     *                                      type: integer
+     *                                      description: The rent duration time (hours).
+     *                                      example: 8
+     *              404:
+     *                  description: Not found
+     */
+
+    router.get("/byDriver/:driverId", carRent.findAllByDriverId)
 
     app.use("/api/carRent", router)
 }

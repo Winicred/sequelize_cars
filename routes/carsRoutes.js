@@ -426,7 +426,7 @@ module.exports = app => {
      *              schema:
      *                  type: integer
      *              required: true
-     *              description: Numeric ID of the user to get
+     *              description: Numeric ID of the user
      *          responses:
      *              200:
      *                  description: Success
